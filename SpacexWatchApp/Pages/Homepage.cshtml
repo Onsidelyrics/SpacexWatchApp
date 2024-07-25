@@ -1,0 +1,113 @@
+﻿@page "/"
+@model SpacexWatchApp.Pages.HomepageModel
+
+@{
+    ViewData["Title"] = "Homepage";
+}
+
+
+<div class="text-center">
+
+
+
+
+    <h1>Spacex Watch App</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SavedLaunches[0].FlightNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SavedLaunches[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SavedLaunches[0].Upcoming)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+@foreach(var item in Model.SavedLaunches ) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem=> item.FlightNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Upcoming)
+            </td>
+        </tr>
+}
+        </tbody>
+    </table>
+
+    <div>
+        <button class ="modal-btn">Add</button>
+
+    </div>
+    <div class="modal-bg">
+        <div class="modal">
+            <h2>Select Launch</h2>
+            <select name="launches" id="launches" onchange="valueSelected()">
+            </select>
+            <button id="SaveBtn" disabled onclick="saveOption()">Save</button>
+            <span class="modal-close">X</span>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    <script>
+        var modalBtn = document.querySelector('.modal-btn'); 
+        var modalBg = document.querySelector('.modal-bg'); 
+        var modalClose = document.querySelector('.modal-close');
+        var launchesSelection = document.getElementById("launches"); 
+        var saveBtn = document.getElementById("SaveBtn");
+        var launchData; 
+
+        modalBtn.addEventListener('click', function(){
+            modalBg.classList.add('bg-active');
+            fetch('https://api.spacexdata.com/v5/launches')
+                .then(res => {
+                    return res.json();
+                })
+                .then(data => {
+                    data.forEach(launch =>{
+                        launchesSelection.options[launchesSelection.options.length] = new Option(launch.name, launch.name);
+                    })
+                    launchData = data; 
+                })
+                .catch(error => console.log(error));
+        });
+
+        modalClose.addEventListener('click', function(){
+            modalBg.classList.remove('bg-active');
+        });
+
+        function valueSelected(){
+            saveBtn.disabled = false; 
+        }
+        function saveOption(){
+            var saveData = launchData.find(obj => obj.name ===launchesSelection.value);
+            fetch('https://localhost:7269/api/SavedLaunches',{
+                method: "POST",
+                body: JSON.stringify({
+                    FlightNumber: saveData.flight_number, 
+                    Name: saveData.name, 
+                    Upcoming: saveData.upcoming
+                }), 
+                headers:{ "Content-type": "application/json; charset=UTF-8" }
+            }); 
+            modalBg.classList.remove('bg-active');
+            }
+    </script>
+
+
+
+</div>

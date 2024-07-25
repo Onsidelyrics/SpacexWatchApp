@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32002.185
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpacexWatchApp", "SpacexWatchApp\SpacexWatchApp.csproj", "{477C31BA-626F-4A89-9B73-227B65E2D0CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{477C31BA-626F-4A89-9B73-227B65E2D0CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{477C31BA-626F-4A89-9B73-227B65E2D0CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{477C31BA-626F-4A89-9B73-227B65E2D0CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{477C31BA-626F-4A89-9B73-227B65E2D0CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8260F0F-9ED9-49F3-9D4E-1E29034700F2}
+	EndGlobalSection
+EndGlobal
